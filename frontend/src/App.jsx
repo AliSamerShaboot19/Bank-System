@@ -1,35 +1,92 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import VerifyDeposit from "./pages/VerifyDeposit";
+import Notifications from "./pages/Notifications";
+import ProtectedRoue from "./components/ProtectedRoue";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Dashboard from "./pages/Dashboard";
+import Transictions from "./pages/Transictions";
+import Transfer from "./pages/Transfer";
+import Profile from "./pages/Profile";
+import TransictionCard from "./components/TransictionCard";
+import Deposit from "./pages/Deposit";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
+    <Router>
+      <Header />
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoue>
+                <Dashboard />
+              </ProtectedRoue>
+            }
+          />
+          <Route
+            path="/transactions"
+            element={
+              <ProtectedRoue>
+                <Transictions />
+              </ProtectedRoue>
+            }
+          />{" "}
+          <Route
+            path="/transfer"
+            element={
+              <ProtectedRoue>
+                <Transfer />
+              </ProtectedRoue>
+            }
+          />{" "}
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoue>
+                <Profile />
+              </ProtectedRoue>
+            }
+          />{" "}
+          <Route
+            path="/mycard"
+            element={
+              <ProtectedRoue>
+                <TransictionCard />
+              </ProtectedRoue>
+            }
+          />{" "}
+          <Route
+            path="/deposit"
+            element={
+              <ProtectedRoue>
+                <Deposit />
+              </ProtectedRoue>
+            }
+          />
+          <Route
+            path="/verify-deposit"
+            element={
+              <ProtectedRoue>
+                <VerifyDeposit />
+              </ProtectedRoue>
+            }
+          />
+          <Route
+            path="/notifications"
+            element={
+              <ProtectedRoue>
+                <Notifications />
+              </ProtectedRoue>
+            }
+          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
-
-export default App
+    </Router>
+  );
+};
+export default App;
